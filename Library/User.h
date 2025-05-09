@@ -1,12 +1,30 @@
 #ifndef USER_H
 #define USER_H
-#include <iostream>
-using namespace std;
-
+#include "Role.h"
 class User
 {
-	//(ім'я, прізвище, ID(8-значне число), email, пароль).
+	//(ВіГ¬'Гї, ГЇГ°ВіГ§ГўГЁГ№ГҐ, ID(8-Г§Г­Г Г·Г­ГҐ Г·ГЁГ±Г«Г®), email, ГЇГ Г°Г®Г«Гј).
+private:
+	string name;
+	string surname;
+	int id;
+	string email;
+	string password;
+	Role role;
+public:
+	User(string n, string s, int id, string em, string pw); 
+	User();
+	string getName() const;
+	string getSurname() const;
+	int getID() const;
+	string getEmail() const;
+	string getPassword() const;
 
-};
+	void setName(string n);
+	void setSurname(string s);
+	void setID(int id);
+	void setEmail(string em);
+	void setPassword(string pw);
+	};
 
 #endif

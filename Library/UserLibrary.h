@@ -3,7 +3,7 @@
 #include "Role.h"
 class UserLibrary
 {
-	//(IDuser, IDбібліотеки, IDrole)
+	//(IDuser, IDГЎВіГЎГ«ВіГ®ГІГҐГЄГЁ, IDrole)
 };
 
 #endif

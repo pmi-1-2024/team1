@@ -1,10 +1,19 @@
 #ifndef ROLE_H
 #define ROLE_H
-#include "User.h"
-class Role
-{
-	//(ID, бібліотекар, користувач, адмін). дефолтно-користувач, може стати адміном чи бібліотекарем
 
+struct RoleType {
+    static const int User = 0;
+    static const int Admin = 1;
+    static const int Librarian = 2;
+};
+
+class Role {
+private:
+    int userId;
+    int role = RoleType::User; // Г¤ГҐГґГ®Г«ГІГ­Г  Г°Г®Г«Гј вЂ” ГЄГ®Г°ГЁГ±ГІГіГўГ Г·
+public:
+    void setRole(int r) { role = r; }
+    int getRole() const { return role; }
 };
 
 
