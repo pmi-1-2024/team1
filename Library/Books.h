@@ -1,21 +1,59 @@
 #ifndef BOOKS_H
 #define BOOKS_H
-class Books
-{
-	//(е ниги, просто книги) - (ID, назву, р≥к, IDавтор(може бути багато), IDвидавництво, к≥льк≥сть стор≥нок, жанр)
-};
+#include <iostream>
+#include <list>
+using namespace std;
 
-struct Ebook {
-	//(формат)
-};
-struct Autor {
+struct Author {
 	//(ID, name, surname)
+	int ID_autor;
+	string author_name;
+	string surname;
 };
 struct Publisher {
 	//(ID, name, address)
+	int ID_publish;
+	string publish_name;
+	string address;
 };
 struct Genre {
 	//(ID, name)
+	int ID_genre;
+	string genre_name;
 };
+
+class Books
+{
+	//(е ниги, просто книги) - (ID, назву, р≥к, IDавтор(може бути багато), IDвидавництво, к≥льк≥сть стор≥нок, жанр)
+private:
+	int ID_book;
+	string book_name;
+	int year;
+	list<Author> authors;
+	Publisher publisher;
+	int page_count;
+	list<Genre> genres;
+public:
+	Books();
+	Books(int IDb, string bn, int ye, list<Author> aut, Publisher pub, int pc, list<Genre> gen);
+
+	int getID_book() const;
+	string getBook_name() const;
+	int getYear() const;
+	int getPages() const;
+
+	void setID_book(int IDb);
+	void setBook_name(string bn);
+	void setYear(int ye);
+	void setPages(int pc);
+
+};
+
+class Ebook : public Books {
+	//(формат)
+protected:
+	int ID_format;
+};
+
 
 #endif
