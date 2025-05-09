@@ -3,7 +3,7 @@
 #include "Role.h"
 class User
 {
-	//(ім'я, прізвище, ID(8-значне число), email, пароль).
+	//(ВіГ¬'Гї, ГЇГ°ВіГ§ГўГЁГ№ГҐ, ID(8-Г§Г­Г Г·Г­ГҐ Г·ГЁГ±Г«Г®), email, ГЇГ Г°Г®Г«Гј).
 private:
 	string name;
 	string surname;

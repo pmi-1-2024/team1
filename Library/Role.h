@@ -1,5 +1,6 @@
 #ifndef ROLE_H
 #define ROLE_H
+
 struct RoleType {
     static const int User = 0;
     static const int Admin = 1;
@@ -9,10 +10,12 @@ struct RoleType {
 class Role {
 private:
     int userId;
-    int role = RoleType::User; // дефолтна роль — користувач
+    int role = RoleType::User; // Г¤ГҐГґГ®Г«ГІГ­Г  Г°Г®Г«Гј вЂ” ГЄГ®Г°ГЁГ±ГІГіГўГ Г·
 public:
     void setRole(int r) { role = r; }
     int getRole() const { return role; }
 };
+
+
 
 #endif
