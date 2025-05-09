@@ -3,12 +3,13 @@
 class Books
 {
 	//(е ниги, просто книги) - (ID, назву, р≥к, IDавтор(може бути багато), IDвидавництво, к≥льк≥сть стор≥нок, жанр)
+
 };
 
 struct Ebook {
 	//(формат)
 };
-struct Autor {
+struct Author {
 	//(ID, name, surname)
 };
 struct Publisher {
