@@ -1,9 +1,27 @@
 #ifndef USERLIBRARY_H
 #define USERLIBRARY_H
-#include "Role.h"
+#include "User.h"
+#include "Library.h"
 class UserLibrary
 {
-	//(IDuser, IDá³áë³îòåêè, IDrole)
+private:
+    User user;
+    Library library;
+    int userID;
+    int libraryID;
+    Role role;
+public:
+	UserLibrary();
+	UserLibrary(const User& u, const Library& l, const Role& r);
+
+	User getUser() const;
+	Library getLibrary() const;
+	int getUserID() const;
+	int getLibraryID() const;
+	Role getRole() const;
+
+	bool isUserInLibrary(int uID, int libID) const;
+	bool hasRole(const std::string& roleType) const;
 };
 
 #endif
