@@ -20,7 +20,14 @@ void Library::print(ostream& os) const {
 		<< ", Address: " << address << ", Duration: " << duration << endl;
 }
 void Library::read(istream& is) {
-	is >> id_library >> library_name >> address >> duration;
+	cout << "Enter Library ID: ";
+	is >> id_library;
+	cout << "Enter Library Name: ";
+	is >> library_name;
+	cout << "Enter Address: ";
+	is >> address;
+	cout << "Enter Duration: ";
+	is >> duration;
 }
 
 ostream& operator<<(ostream& os, const Library& lib) {
@@ -29,7 +36,7 @@ ostream& operator<<(ostream& os, const Library& lib) {
 	return os;
 }
 istream& operator>>(istream& is, Library& lib) {
-	lib.read(is);
+	is >> lib.id_library >> lib.library_name >> lib.address >> lib.duration;
 	return is;
 }
 

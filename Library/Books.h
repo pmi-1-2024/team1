@@ -16,6 +16,7 @@ private:
 public:
 	Books();
 	Books(int IDb, string bn, int ye, list<Author> aut, Publisher pub, int pc, list<Genre> gen);
+	virtual ~Books();
 
 	int getID_book() const;
 	string getBook_name() const;
@@ -25,16 +26,8 @@ public:
 	Publisher getPublisher() const;
 	list<Genre> getGenres() const;
 
-	void setID_book(int IDb);
-	void setBook_name(string bn);
-	void setYear(int ye);
-	void setPages(int pc);
-	void setAuthors(list<Author> aut);
-	void setPublisher(Publisher pub);
-	void setGenres(list<Genre> gen);
-
-	void print(ostream& os) const;
-	void read(istream& is);
+	virtual void print(ostream& os) const;
+	virtual void read(istream& is);
 	friend ostream& operator<<(ostream& os, const Books& b);
 	friend istream& operator>>(istream& is, Books& b);
 

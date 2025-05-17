@@ -1,5 +1,7 @@
-2
-Uliana Trukhan 10000001 ul@gmail.com 123456 1 user
+3
+Uliana Trukhan 10000001 ul@gmail.com 12345678 0 user
 
-Nazar Trukhan 10000002 naz@gmail.com 123457 2 admin
+Nazar Trukhan 10000002 naz@gmail.com 12345778 2 admin
+
+Sam Brook 10000003 s@gmail.com 96385274 1 librarian
 

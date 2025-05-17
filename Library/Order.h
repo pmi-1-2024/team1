@@ -2,11 +2,10 @@
 #define ORDER_H
 #include <iostream>
 #include <list>
+#include <fstream>
 using namespace std;
 class Order
 {
-
-	//(ID, ID_book, ID_user, start_day(дата коли книжка була взята))
 private:
 	int ID_order;
 	list<int> ID_book;
@@ -26,8 +25,11 @@ public:
 	void setID_user(int IDu);
 	void setStart_day(int sd);
 
+	int loadLastOrderID(const string& filename);
+	void saveLastOrderID(const string& filename, int id);
+
 	void print(ostream& os) const;
-	void read(istream& is);
+	void read(istream& is, int userID);
 	friend ostream& operator<<(ostream& os, const Order& o);
 	friend istream& operator>>(istream& is, Order& o);
 };

@@ -6,7 +6,12 @@ Role::Role(int rol_id, string t) : role_id(rol_id), type(t) {}
 int Role::getRole_id() const { return role_id; }
 string Role::getType() const { return type; }
 
-void Role::setRole_id(int rol_id) { role_id = rol_id; }
+void Role::setRole_id(int rol_id) {
+	if (rol_id < 0) {
+		throw invalid_argument("Role ID must be positive");
+	}
+	role_id = rol_id;
+}
 void Role::setType(string t) {
 	if (t != "user" && t != "admin" && t != "librarian") {
 		throw invalid_argument("Invalid role type. Allowed: user, admin, librarian");

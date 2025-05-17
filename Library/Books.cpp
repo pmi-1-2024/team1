@@ -2,6 +2,7 @@
 Books::Books() : ID_book(0), book_name(" "), year(0), page_count(0) {}
 Books::Books(int IDb, string bn, int ye, list<Author> aut, Publisher pub, int pc, list<Genre> gen)
 	: ID_book(IDb), book_name(bn), year(ye), authors(aut), publisher(pub), page_count(pc), genres(gen) {}
+Books::~Books() {}
 
 int Books::getID_book() const { return ID_book; }
 string Books::getBook_name() const { return book_name; }
@@ -11,16 +12,8 @@ list<Author> Books::getAuthors() const { return authors; }
 Publisher Books::getPublisher() const { return publisher; }
 list<Genre> Books::getGenres() const { return genres; }
 
-void Books::setID_book(int IDb) { ID_book = IDb; }
-void Books::setBook_name(string bn) { book_name = bn; }
-void Books::setYear(int ye) { year = ye; }
-void Books::setPages(int pc) { page_count = pc; }
-void Books::setAuthors(list<Author> aut) { authors = aut; }
-void Books::setPublisher(Publisher pub) { publisher = pub; }
-void Books::setGenres(list<Genre> gen) { genres = gen; }
-
 void Books::print(ostream& os) const {
-    os << "ID: " << ID_book << ", Name: " << book_name << ", Year: " << year;
+    os << "ID: " << ID_book << ", Name: " << book_name << ", Year: " << year << " ";
 	os << "Authors: ";
 	for (const auto& author : authors) {
 		os << author.author_name << " " << author.surname << ", ";
@@ -39,32 +32,33 @@ void Books::read(istream& is) {
     authors.clear();
     genres.clear();
 
-    is >> ID_book >> book_name >> year;
+	cout << "ID: ";
+    is >> ID_book;
+    cout << "Book name: ";
+    is >> book_name;
+    cout << "Year: ";
+    is >> year;
 
+	cout << "Number of authors: ";
     int num_authors;
     is >> num_authors;
     for (int i = 0; i < num_authors; ++i) {
         Author author;
-        is >> author.ID_autor >> author.author_name >> author.surname;
+        author.read(is);
         authors.push_back(author);
     }
 
-    is >> publisher.ID_publish >> publisher.publish_name >> publisher.address;
+	cout << "Publisher: ";
+    publisher.read(is);
+	cout << "Page count: ";
     is >> page_count;
 
+	cout << "Number of genres: ";
     int num_genres;
     is >> num_genres;
     for (int i = 0; i < num_genres; ++i) {
         Genre genre;
-        string raw_genre;
-        is >> genre.ID_genre >> raw_genre;
-
-        // Видаляємо кому в кінці, якщо є
-        if (!raw_genre.empty() && raw_genre.back() == ',') {
-            raw_genre.pop_back();
-        }
-
-        genre.genre_name = raw_genre;
+		genre.read(is);
         genres.push_back(genre);
     }
 }
@@ -85,6 +79,27 @@ ostream& operator<<(ostream& os, const Books& b) {
 	return os;
 }
 istream& operator>>(istream& is, Books& b) {
-	b.read(is);
-	return is;
+     b.authors.clear();
+     b.genres.clear();
+     is >> b.ID_book >> b.book_name >> b.year;
+
+     int num_authors;
+     is >> num_authors;
+     for (int i = 0; i < num_authors; ++i) {
+         Author author;
+         is >> author;
+         b.authors.push_back(author);
+     }
+
+     is >> b.publisher;
+     is >> b.page_count;
+
+     int num_genres;
+     is >> num_genres;
+     for (int i = 0; i < num_genres; ++i) {
+         Genre genre;
+         is >> genre;
+         b.genres.push_back(genre);
+     }
+    return is;
 }

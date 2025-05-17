@@ -16,7 +16,8 @@ void Ebook::read(istream& is) {
 	is >> ID_format;
 }
 ostream& operator<<(ostream& os, const Ebook& eb) {
-	eb.print(os);
+	os << static_cast<const Books&>(eb);
+	os << eb.ID_format << endl;
 	return os;
 }
 istream& operator>>(istream& is, Ebook& eb) {

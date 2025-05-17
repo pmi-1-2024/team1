@@ -1,6 +1,7 @@
 #ifndef USER_H
 #define USER_H
 #include "Role.h"
+#include <fstream>
 class User
 {
 private:
@@ -32,7 +33,8 @@ public:
 	
 	void changeRoleType(const string& newRoleType);
 
-	bool login(const string& em, const string& pw) const;
+	int loadLastUserID(const string& filename);
+	void saveLastUserID(const string& filename, int id);
 
 	void print(ostream& os) const;
 	void read(istream& is);

@@ -42,16 +42,33 @@ void User::setPassword(string pw) {
 void User::setRole(const Role& r) { role = r; }
 
 void User::changeRoleType(const string& newRoleType) {
-	if (newRoleType == "user" || newRoleType == "admin" || newRoleType == "librarian") {
-		role.setType(newRoleType);
+	if (newRoleType == "user") {
+		role.setType("user");
+		role.setRole_id(0);
+	}
+	else if (newRoleType == "librarian") {
+		role.setType("librarian");
+		role.setRole_id(1);
+	}
+	else if (newRoleType == "admin") {
+		role.setType("admin");
+		role.setRole_id(2);
 	}
 	else {
 		throw invalid_argument("Invalid role type. Allowed: user, admin, librarian");
 	}
 }
 
-bool User::login(const string& em, const string& pw) const {
-	return email == em && password == pw;
+int User::loadLastUserID(const string& filename) {
+	ifstream file(filename);
+	int id = 10000000;
+	if (file >> id) return id;
+	return 10000000;
+}
+
+void User::saveLastUserID(const string& filename, int id) {
+	ofstream file(filename, ios::trunc);
+	file << id;
 }
 
 void User::print(ostream& os) const {
@@ -60,8 +77,29 @@ void User::print(ostream& os) const {
 		<< ", Role: " << role.getType() << endl;
 }
 void User::read(istream& is) {
-	is >> name >> surname >> user_id >> email >> password;
-	role.read(is);
+	cout << "Name: ";
+	is >> name;
+
+	cout << "Surname: ";
+	is >> surname;
+
+	int lastID = loadLastUserID("last_user_id.txt");
+	user_id = lastID + 1;
+	saveLastUserID("last_user_id.txt", user_id);
+
+	cout << "Email: ";
+	is >> email;
+	if (!checkEmail(email)) {
+		throw invalid_argument("Invalid email (must contain '@')");
+	}
+
+	cout << "Password: ";
+	is >> password;
+	if (!checkPassword(password)) {
+		throw invalid_argument("Password must be exactly 8 digits");
+	}
+
+	role = Role();
 }
 ostream& operator<<(ostream& os, const User& u) {
 	os << u.name << " " << u.surname << " " << u.user_id << " "
@@ -69,6 +107,7 @@ ostream& operator<<(ostream& os, const User& u) {
 	return os;
 }
 istream& operator>>(istream& is, User& u) {
-	u.read(is);
+	is >> u.name >> u.surname >> u.user_id >> u.email >> u.password;
+	is >> u.role;
 	return is;
 }

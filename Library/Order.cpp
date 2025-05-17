@@ -13,6 +13,19 @@ void Order::setID_book(list<int> IDb) { ID_book = IDb; }
 void Order::setID_user(int IDu) { ID_user = IDu; }
 void Order::setStart_day(int sd) { start_day = sd; }
 
+int Order::loadLastOrderID(const string& filename) {
+	ifstream file(filename);
+	int id = 10000;
+	if (file >> id) return id;
+	else cerr << "Error reading last order ID from file. Using default value: " << id << endl;
+	return 10000;
+}
+
+void Order::saveLastOrderID(const string& filename, int id) {
+	ofstream file(filename, ios::trunc);
+	file << id;
+}
+
 void Order::print(ostream& os) const {
 	os << "Order ID: " << ID_order << ", User ID: " << ID_user << ", Start Day: " << start_day << endl;
 	os << "Book IDs: ";
@@ -21,13 +34,24 @@ void Order::print(ostream& os) const {
 	}
 	os << endl;
 }
-void Order::read(istream& is) {
+void Order::read(istream& is, int userID) {
 	ID_book.clear();
-	is >> ID_order >> ID_user >> start_day;
+
+	int lastID = loadLastOrderID("last_order_id.txt");
+	ID_order = lastID + 1;
+	saveLastOrderID("last_order_id.txt", ID_order);
+
+	ID_user = userID;
+
+	cout << "Start day: ";
+	is >> start_day;
+
+	cout << "Number of books: ";
 	int num_books;
 	is >> num_books;
 	for (int i = 0; i < num_books; ++i) {
 		int book_id;
+		cout << "Book ID: ";
 		is >> book_id;
 		ID_book.push_back(book_id);
 	}
@@ -43,6 +67,13 @@ ostream& operator<<(ostream& os, const Order& o) {
 	return os;
 }
 istream& operator>>(istream& is, Order& o) {
-	o.read(is);
+	int count;
+	is >> o.ID_order >> o.ID_user >> o.start_day >> count;
+	o.ID_book.clear();
+	for (int i = 0; i < count; ++i) {
+		int id;
+		is >> id;
+		o.ID_book.push_back(id);
+	}
 	return is;
 }
