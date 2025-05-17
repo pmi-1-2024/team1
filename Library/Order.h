@@ -25,6 +25,11 @@ public:
 	void setID_book(list<int> IDb);
 	void setID_user(int IDu);
 	void setStart_day(int sd);
+
+	void print(ostream& os) const;
+	void read(istream& is);
+	friend ostream& operator<<(ostream& os, const Order& o);
+	friend istream& operator>>(istream& is, Order& o);
 };
 
 #endif
