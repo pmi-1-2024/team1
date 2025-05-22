@@ -1,0 +1,21 @@
+2
+PAPERBOOK
+1010 Hobbit 1937
+2 1012 J.R.R. Tolkien 1013 Someone Else 
+1562 Lev UK 310
+2 9556 Fantasy 9559 Adventure 
+102022
+
+EBOOK
+1020 Harry_Potter 1997
+1 1014 J.K. Rowling 
+1562 Lev UK 500
+1 9556 Fantasy 
+100000
+
+PAPERBOOK
+1030 ZelenyiZlon1K 1488
+2 1019 J.R.R. Tolkien 1018 Someone Else 
+1562 Lev UK 310
+2 9557 Horror 9559 Adventure 
+105122
