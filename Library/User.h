@@ -30,7 +30,7 @@ public:
 	void setEmail(string em);
 	void setPassword(string pw);
 	void setRole(const Role& r);
-	
+
 	void changeRoleType(const string& newRoleType);
 
 	int loadLastUserID(const string& filename);
