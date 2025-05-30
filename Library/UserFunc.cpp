@@ -14,6 +14,8 @@ void userMenuHandler(const User& user) {
     loadListFromFile(orders, "orders.txt");
     list<Books*> books;
     loadBooksFromFile(books, "books.txt");
+    list<Library> libraries;
+    loadListFromFile(libraries, "libraries.txt");
 
     int choice;
     do {
@@ -22,7 +24,15 @@ void userMenuHandler(const User& user) {
         if (choice == 1) {
             cout << "Available Books:\n";
             for (const auto& b : books) {
-                b->print(cout);
+                auto it = find_if(libraries.begin(), libraries.end(),
+                    [&](const Library& lib) { return lib.getId_library() == b->getLibraryID(); });
+
+                if (it != libraries.end()) {
+                    b->print(cout, *it);
+                }
+                else {
+                    cout << "Library not found for this book.\n";
+                }
                 cout << "------------------\n";
             }
 
