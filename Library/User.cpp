@@ -1,6 +1,7 @@
 #include "User.h"
+#include "validators.h"
 
-bool User::checkEmail(const string& em) const {
+bool User::checkEmail(const string& em) const {   
 	return em.find('@') != string::npos;
 }
 
@@ -12,32 +13,33 @@ bool User::checkPassword(const string& pw) const {
 	return true;
 }
 
+
 User::User() : name(" "), surname(" "), user_id(0), email(" "), password(" "), role() {}
 
 User::User(string n, string s, int id, string em, string pw, Role r)
 	: name(n), surname(s), user_id(id), email(em), password(pw), role(r) {}
 
 string User::getName() const { return name; }
-string User:: getSurname() const { return surname; }
-int User:: getID() const { return user_id; }
-string User:: getEmail() const { return email; }
-string User:: getPassword() const { return password; }
+string User::getSurname() const { return surname; }
+int User::getID() const { return user_id; }
+string User::getEmail() const { return email; }
+string User::getPassword() const { return password; }
 Role User::getRole() const { return role; }
 
 void User::setName(string n) { name = n; }
 void User::setSurname(string s) { surname = s; }
 void User::setId(int id) { user_id = id; }
-void User::setEmail(string em) { 
-	if (checkEmail(em))
+void User::setEmail(string em) {
+	if (isValidEmail(email))
 		email = em;
 	else
-		throw invalid_argument("Invalid email: must contain '@'");
+		throw invalid_argument("Invalid email: must look like this: example@example.domain");
 }
 void User::setPassword(string pw) {
-	if (checkPassword(pw))
+	if (isValidPassword(password))
 		password = pw;
 	else
-		throw invalid_argument("Invalid password: must be exactly 8 digits");
+		throw invalid_argument("Invalid password: Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long.");
 }
 void User::setRole(const Role& r) { role = r; }
 
@@ -89,13 +91,13 @@ void User::read(istream& is) {
 
 	cout << "Email: ";
 	is >> email;
-	if (!checkEmail(email)) {
+	if (!isValidEmail(email)) {
 		throw invalid_argument("Invalid email (must contain '@')");
 	}
 
 	cout << "Password: ";
 	is >> password;
-	if (!checkPassword(password)) {
+	if (!isValidPassword(password)) {
 		throw invalid_argument("Password must be exactly 8 digits");
 	}
 
