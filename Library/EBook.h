@@ -12,7 +12,7 @@ public:
 	int getID_format() const;
 	void setID_format(int IDf);
 
-	void print(ostream& os) const;
+	void print(ostream& os, const Library& lib) const;
 	void read(istream& is);
 	friend ostream& operator<<(ostream& os, const Ebook& eb);
 	friend istream& operator>>(istream& is, Ebook& eb);
