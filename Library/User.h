@@ -12,8 +12,6 @@ private:
 	string password;
 	Role role;
 
-	bool checkEmail(const string& em) const;
-	bool checkPassword(const string& pw) const;
 public:
 	User();
 	User(string n, string s, int id, string em, string pw, Role r = Role());

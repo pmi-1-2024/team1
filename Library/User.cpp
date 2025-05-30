@@ -1,19 +1,6 @@
 #include "User.h"
 #include "validators.h"
 
-bool User::checkEmail(const string& em) const {   
-	return em.find('@') != string::npos;
-}
-
-bool User::checkPassword(const string& pw) const {
-	if (pw.length() != 8) return false;
-	for (char c : pw)
-		if (!isdigit(c))
-			return false;
-	return true;
-}
-
-
 User::User() : name(" "), surname(" "), user_id(0), email(" "), password(" "), role() {}
 
 User::User(string n, string s, int id, string em, string pw, Role r)
@@ -92,13 +79,13 @@ void User::read(istream& is) {
 	cout << "Email: ";
 	is >> email;
 	if (!isValidEmail(email)) {
-		throw invalid_argument("Invalid email (must contain '@')");
+		throw invalid_argument("Invalid email: must look like this: example@example.domain");
 	}
 
 	cout << "Password: ";
 	is >> password;
 	if (!isValidPassword(password)) {
-		throw invalid_argument("Password must be exactly 8 digits");
+		throw invalid_argument("Invalid password: Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long.");
 	}
 
 	role = Role();
